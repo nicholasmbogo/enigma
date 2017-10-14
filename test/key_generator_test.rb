@@ -19,4 +19,13 @@ class KeyGeneratorTest < Minitest::Test
     assert_equal 5, key_generator.key.length
     #.to_s converting to sting
   end
+
+  def test_has_a_key_rotation
+    key_generator = KeyGenerator.new
+    a = key_generator.key[0..1].join.to_i
+
+    assert_equal a, key_generator.a_rotation
+  end
+
+
 end
