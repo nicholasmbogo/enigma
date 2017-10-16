@@ -1,3 +1,4 @@
+require './lib/character_map'
 class Encrypt
 
   attr_reader :message, :rotations, :character_map
