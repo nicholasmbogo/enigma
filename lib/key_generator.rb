@@ -12,7 +12,7 @@ class KeyGenerator
    end
 
    def a_rotation
-      @key.[0..1].join.to_i
+      @key[0..1].join.to_i
    end
 
    def b_rotation
@@ -24,7 +24,7 @@ class KeyGenerator
    end
 
    def d_rotation
-     @key[3..4].join.to_i
+     @key[-2..-1].join.to_i
    end
 
  end
