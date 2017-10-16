@@ -2,8 +2,8 @@ class CharacterMap
 
   attr_reader :dictionary
 
-  def initialize
-    @dictionary = "abcdefghijklmnopqrstuvwxyz0123456789 .,"
+  def dictionary
+    @dictionary = "abcdefghijklmnopqrstuvwxyz01234567890 ,."
   end
 
   def encrypt_character(character, rotation)
@@ -11,4 +11,6 @@ class CharacterMap
     encrypt_location = (rotation + character_location) % dictionary.length
     dictionary[encrypt_location]
   end
+
+  #use (/\s/) for spaces??
 end

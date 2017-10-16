@@ -9,7 +9,7 @@ require 'time'
 class OffsetCalculatorTest < Minitest::Test
 
   def test_off_set_calculator_exists
-    offset = OffsetCalculator.new(41521)
+    offset = OffsetCalculator.new(41521, date)
 
     assert_instance_of OffsetCalculator, offset
   end
@@ -22,7 +22,7 @@ class OffsetCalculatorTest < Minitest::Test
   end
 
   def test_formated_date_is_squared
-    date = Time.parse(" 2017-10-14 13:54:41 -0600")
+    #date = Time.parse(" 2017-10-14 13:54:41 -0600")
     offset = OffsetCalculator.new(41521, date)
 
     assert_equal 10285407889, offset.squared_date
@@ -47,35 +47,6 @@ class OffsetCalculatorTest < Minitest::Test
     assert_equal b, offset.b_offset
     assert_equal c, offset.c_offset
     assert_equal d, offset.d_offset
-  end
-
-  def test_has_a_key_rotation
-    offset = OffsetCalculator.new(41521)
-    #a = offset.key[0..1].join.to_i
-
-    assert_equal 41, offset.a_rotation
-  end
-
-  def test_has_b_key_rotation
-    offset = OffsetCalculator.new(41521)
-    #b = offset.key[1..2].join.to_i
-
-    assert_equal 15, offset.b_rotation
-  end
-
-  def test_has_c_key_rotation
-    offset = OffsetCalculator.new(41521)
-    #key = offset.key
-    #c = offset.key[2..3].join.to_i
-
-    assert_equal 52, offset.c_rotation
-  end
-
-  def test_has_d_key_rotation
-    offset = OffsetCalculator.new(41521)
-    #d = offset.key[-2..-1].join.to_i
-
-    assert_equal 21, offset.d_rotation
   end
 
   def test_has_a_final_rotation

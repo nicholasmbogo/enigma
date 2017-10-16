@@ -1,10 +1,12 @@
+require_relative 'key_generator'
+
 class OffsetCalculator
 
   attr_reader :key
 
   def initialize(key, date = Time.now)
     @date = date
-    @key = key
+    @key = KeyGenerator.new
   end
 
   def formated_date
@@ -35,24 +37,20 @@ class OffsetCalculator
     get_last_four.to_s[-1].to_i
   end
 
-  def key_array
-    @key.to_s.chars.map{|num| num.to_i}
-  end
-
   def a_rotation
-    key_array[0..1].join.to_i
+    @key.a_rotation
   end
 
   def b_rotation
-    key_array[1..2].join.to_i
+    @key.b_rotation
   end
 
   def c_rotation
-    key_array[2..3].join.to_i
+    @key.c_rotation
   end
 
   def d_rotation
-    key_array[-2..-1].join.to_i
+    @key.d_rotation
   end
 
   def final_rotation
