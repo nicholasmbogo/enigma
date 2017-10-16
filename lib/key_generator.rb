@@ -7,7 +7,7 @@ class KeyGenerator
   end
 
   def create_key
-    5.times.map{Random.rand(10)}
+    5.times.map{Random.rand(10)}.join.to_i
   #num = 41521
   end
-end
+ end
