@@ -35,11 +35,14 @@ class Encrypt
     split_into_groups_of_four.map do |chunk|
       @encrypted_message << encrypt_character(chunk[0], @rotation[:a])
       if chunk[1] != nil
-      @encrypted_message << encrypt_character(chunk[1], @rotation[:b]) end
+        @encrypted_message << encrypt_character(chunk[1], @rotation[:b])
+      end
       if chunk[2] != nil
-      @encrypted_message << encrypt_character(chunk[2], @rotation[:c]) end
+        @encrypted_message << encrypt_character(chunk[2], @rotation[:c])
+      end
       if chunk[3] != nil
-      @encrypted_message << encrypt_character(chunk[3], @rotation[:d]) end
+        @encrypted_message << encrypt_character(chunk[3], @rotation[:d])
+      end
     end
   end
 

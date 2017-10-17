@@ -3,7 +3,8 @@ require './lib/offset_calculator'
 require './lib/character_map'
 require 'pry'
 
-class Decrypt < CharacterMap
+class Decrypt
+  include CharacterMap
 
   attr_reader :message, :rotations, :character_map
 
@@ -32,13 +33,16 @@ class Decrypt < CharacterMap
 
   def translate_chunks
     split_into_groups_of_four.map do |chunk|
-      @decrypted_message << decrypt_character(chunk[0], @rotations[:a])
+        @decrypted_message << decrypt_character(chunk[0], @rotations[:a])
       if chunk[1] != nil
-      @decrypted_message << decrypt_character(chunk[1], @rotations[:b]) end
+        @decrypted_message << decrypt_character(chunk[1], @rotations[:b])
+      end
       if chunk[2] != nil
-      @decrypted_message << decrypt_character(chunk[2], @rotations[:c]) end
+        @decrypted_message << decrypt_character(chunk[2], @rotations[:c])
+      end
       if chunk[3] != nil
-      @decrypted_message << decrypt_character(chunk[3], @rotations[:d]) end
+        @decrypted_message << decrypt_character(chunk[3], @rotations[:d])
+      end
     end
   end
 
