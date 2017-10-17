@@ -15,7 +15,7 @@ class CharacterMapTest < Minitest::Test
 
   def test_has_a_character_list
     character = CharacterMap.new
-    dictionary = "abcdefghijklmnopqrstuvwxyz0123456789 .,"
+    dictionary = "abcdefghijklmnopqrstuvwxyz01234567890 ,."
 
     assert_equal dictionary, character.dictionary
   end
@@ -29,8 +29,8 @@ class CharacterMapTest < Minitest::Test
   def test_can_encrypt_character_that_wraps_everything
     character = CharacterMap.new
 
-    assert_equal "g", character.encrypt_character("9", 10)
-    assert_equal "g", character.encrypt_character("9", 49)
+    assert_equal "f", character.encrypt_character("9", 10)
+    assert_equal "e", character.encrypt_character("9", 49)
 
   end
 end

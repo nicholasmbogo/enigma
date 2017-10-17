@@ -9,6 +9,7 @@ require 'time'
 class OffsetCalculatorTest < Minitest::Test
 
   def test_off_set_calculator_exists
+    date = Time.parse(" 2017-10-14 13:54:41 -0600")
     offset = OffsetCalculator.new(41521, date)
 
     assert_instance_of OffsetCalculator, offset
@@ -22,7 +23,7 @@ class OffsetCalculatorTest < Minitest::Test
   end
 
   def test_formated_date_is_squared
-    #date = Time.parse(" 2017-10-14 13:54:41 -0600")
+    date = Time.parse(" 2017-10-14 13:54:41 -0600")
     offset = OffsetCalculator.new(41521, date)
 
     assert_equal 10285407889, offset.squared_date

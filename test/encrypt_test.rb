@@ -24,14 +24,14 @@ class EncryptTest < Minitest::Test
     encrypt = Encrypt.new("message", {a: 40, b: 21, c: 34, d: 29})
     divided = encrypt.split_into_groups_of_four
 
-    assert_equal ["mess","age"], divided
+    assert_equal [["m", "e", "s", "s"], ["a", "g", "e"]], divided
   end
 
   def test_the_message_can_be_split_with_spaces
     encrypt = Encrypt.new("message here", {a: 40, b: 21, c: 34, d: 29})
     divided = encrypt.split_into_groups_of_four
 
-    assert_equal ["mess","age ","here"], divided
+    assert_equal [["m", "e", "s", "s"], ["a", "g", "e", " "], ["h", "e", "r", "e"]], divided
   end
 
   # def test_it_can_translate_chunks

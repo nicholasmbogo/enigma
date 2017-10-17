@@ -1,28 +1,18 @@
 require './lib/character_map'
 require './lib/offset_calculator'
+require './lib/character_map'
 require 'pry'
 
-class Decrypt
+class Decrypt < CharacterMap
 
   attr_reader :message, :rotations, :character_map
 
   def initialize(message, rotations)
     @message = message
-    @character_map = CharacterMap.new
     @offsets = OffsetCalculator.new
     @rotation = @offsets.final_rotation
     @rotations = rotations
     @decrypted_message = []
-  end
-
-  def dictionary
-    @character_map.dictionary.reverse
-  end
-
-  def decrypt_character(character, rotation)
-    character_location = dictionary.index(character)
-    encrypt_location = (rotation + character_location) % dictionary.length
-    dictionary[encrypt_location]
   end
 
   def split_message
@@ -37,7 +27,10 @@ class Decrypt
     chunks
   end
 
-  def translate_chunk
+  #Remember to change "rotations" back to "rotation"...
+  #"rotations" is only for testing.
+
+  def translate_chunks
     split_into_groups_of_four.map do |chunk|
       @decrypted_message << decrypt_character(chunk[0], @rotations[:a])
       if chunk[1] != nil
@@ -50,11 +43,11 @@ class Decrypt
   end
 
   def decrypted_message
-    translate_chunk
+    translate_chunks
     @decrypted_message.join
   end
 
 end
 
-d = Decrypt.new("f9ogtf5dnz50aa5eia", {a: 40, b: 21, c: 34, d: 29})
+d = Decrypt.new("t2,ges03nsiclf54esice", {a: 40, b: 21, c: 34, d: 29})
 puts d.decrypted_message

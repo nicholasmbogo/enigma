@@ -1,16 +1,23 @@
-class CharacterMap
+module CharacterMap
 
-  attr_reader :dictionary
+  def encrypt_dictionary
+    "abcdefghijklmnopqrstuvwxyz01234567890 ,."
+  end
 
-  def dictionary
-    @dictionary = "abcdefghijklmnopqrstuvwxyz01234567890 ,."
+  def decrypt_dictionary
+    encrypt_dictionary.reverse
   end
 
   def encrypt_character(character, rotation)
-    character_location = dictionary.index(character)
-    encrypt_location = (rotation + character_location) % dictionary.length
-    dictionary[encrypt_location]
+    character_location = encrypt_dictionary.index(character)
+    encrypt_location = (rotation + character_location) % encrypt_dictionary.length
+    encrypt_dictionary[encrypt_location]
   end
 
-  #use (/\s/) for spaces??
+  def decrypt_character(character, rotation)
+    character_location = decrypt_dictionary.index(character)
+    encrypt_location = (rotation + character_location) % decrypt_dictionary.length
+    decrypt_dictionary[encrypt_location]
+  end
+
 end

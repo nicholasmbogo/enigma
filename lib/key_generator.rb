@@ -1,13 +1,15 @@
+require 'pry'
+
 class KeyGenerator
 
   attr_reader :key
 
-  def initialize(key)
+  def initialize(key = nil)
     @key = key
   end
 
   def create_key
-     5.times.map{Random.rand(10)}
+    @key = 5.times.map{Random.rand(10)} if key.nil?
    #num = 41521
    end
 

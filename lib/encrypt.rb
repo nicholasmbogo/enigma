@@ -1,28 +1,19 @@
 require './lib/character_map'
 require './lib/offset_calculator'
+require './lib/character_map'
+
 require 'pry'
 
 class Encrypt
+  include CharacterMap
 
-  attr_reader :message, :rotations, :character_map
+  attr_reader :message, :rotations, :character_map, :character
 
-  def initialize(message, rotations)
+  def initialize(message, rotation = nil)
     @message = message
-    @character_map = CharacterMap.new
     @offsets = OffsetCalculator.new
     @rotation = @offsets.final_rotation
-    @rotations = rotations
     @encrypted_message = []
-  end
-
-  def dictionary
-    @character_map.dictionary
-  end
-
-  def encrypt_character(character, rotation)
-    character_location = dictionary.index(character)
-    encrypt_location = (rotation + character_location) % dictionary.length
-    dictionary[encrypt_location]
   end
 
   def split_message
@@ -37,24 +28,27 @@ class Encrypt
     chunks
   end
 
-  def translate_chunk
+  #Remember to change "rotations" back to "rotation"...
+  #"rotations" is only for testing.
+
+  def translate_chunks
     split_into_groups_of_four.map do |chunk|
-      @encrypted_message << encrypt_character(chunk[0], @rotations[:a])
+      @encrypted_message << encrypt_character(chunk[0], @rotation[:a])
       if chunk[1] != nil
-      @encrypted_message << encrypt_character(chunk[1], @rotations[:b]) end
+      @encrypted_message << encrypt_character(chunk[1], @rotation[:b]) end
       if chunk[2] != nil
-      @encrypted_message << encrypt_character(chunk[2], @rotations[:c]) end
+      @encrypted_message << encrypt_character(chunk[2], @rotation[:c]) end
       if chunk[3] != nil
-      @encrypted_message << encrypt_character(chunk[3], @rotations[:d]) end
+      @encrypted_message << encrypt_character(chunk[3], @rotation[:d]) end
     end
   end
 
   def encrypted_message
-    translate_chunk
+    translate_chunks
     @encrypted_message.join
   end
 
 end
 
-e = Encrypt.new("fourty one hat pit", {a: 40, b: 21, c: 34, d: 29})
-puts e.encrypted_message
+d = Encrypt.new("there can only be one", {a: 40, b: 21, c: 34, d: 29})
+puts d.encrypted_message
