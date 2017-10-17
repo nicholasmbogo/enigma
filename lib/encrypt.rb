@@ -1,7 +1,7 @@
 require './lib/character_map'
 require './lib/offset_calculator'
 require './lib/character_map'
-
+require 'time'
 require 'pry'
 
 class Encrypt
@@ -9,9 +9,9 @@ class Encrypt
 
   attr_reader :message, :rotations, :character_map, :character
 
-  def initialize(message, rotation = nil)
+  def initialize(message, key = nil, date = nil)
     @message = message
-    @offsets = OffsetCalculator.new
+    @offsets = OffsetCalculator.new(key, date)
     @rotation = @offsets.final_rotation
     @encrypted_message = []
   end
@@ -35,11 +35,14 @@ class Encrypt
     split_into_groups_of_four.map do |chunk|
       @encrypted_message << encrypt_character(chunk[0], @rotation[:a])
       if chunk[1] != nil
-      @encrypted_message << encrypt_character(chunk[1], @rotation[:b]) end
+      @encrypted_message << encrypt_character(chunk[1], @rotation[:b])
+      end
       if chunk[2] != nil
-      @encrypted_message << encrypt_character(chunk[2], @rotation[:c]) end
+      @encrypted_message << encrypt_character(chunk[2], @rotation[:c])
+      end
       if chunk[3] != nil
-      @encrypted_message << encrypt_character(chunk[3], @rotation[:d]) end
+      @encrypted_message << encrypt_character(chunk[3], @rotation[:d])
+      end
     end
   end
 
@@ -49,6 +52,3 @@ class Encrypt
   end
 
 end
-
-d = Encrypt.new("there can only be one", {a: 40, b: 21, c: 34, d: 29})
-puts d.encrypted_message

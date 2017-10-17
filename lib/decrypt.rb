@@ -1,17 +1,18 @@
 require './lib/character_map'
 require './lib/offset_calculator'
 require './lib/character_map'
+require 'time'
 require 'pry'
 
-class Decrypt < CharacterMap
+class Decrypt
+  include CharacterMap
 
   attr_reader :message, :rotations, :character_map
 
-  def initialize(message, rotations)
+  def initialize(message, key = nil, date = nil)
     @message = message
-    @offsets = OffsetCalculator.new
+    @offsets = OffsetCalculator.new(key, date)
     @rotation = @offsets.final_rotation
-    @rotations = rotations
     @decrypted_message = []
   end
 
@@ -32,13 +33,16 @@ class Decrypt < CharacterMap
 
   def translate_chunks
     split_into_groups_of_four.map do |chunk|
-      @decrypted_message << decrypt_character(chunk[0], @rotations[:a])
+      @decrypted_message << decrypt_character(chunk[0], @rotation[:a])
       if chunk[1] != nil
-      @decrypted_message << decrypt_character(chunk[1], @rotations[:b]) end
+      @decrypted_message << decrypt_character(chunk[1], @rotation[:b])
+      end
       if chunk[2] != nil
-      @decrypted_message << decrypt_character(chunk[2], @rotations[:c]) end
+      @decrypted_message << decrypt_character(chunk[2], @rotation[:c])
+      end
       if chunk[3] != nil
-      @decrypted_message << decrypt_character(chunk[3], @rotations[:d]) end
+      @decrypted_message << decrypt_character(chunk[3], @rotation[:d])
+      end
     end
   end
 
@@ -49,5 +53,5 @@ class Decrypt < CharacterMap
 
 end
 
-d = Decrypt.new("t2,ges03nsiclf54esice", {a: 40, b: 21, c: 34, d: 29})
+d = Decrypt.new("1 ylx .,8d.6. rl.4k6rcjw73", "12345")
 puts d.decrypted_message

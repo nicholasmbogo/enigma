@@ -4,8 +4,8 @@ class OffsetCalculator
 
   attr_reader :key
 
-  def initialize(key = nil, date = Time.now)
-    @date = date
+  def initialize(key = nil, date = nil)
+    @date = Time.now
     @key_gen = KeyGenerator.new(key)
   end
 
