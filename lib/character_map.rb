@@ -1,7 +1,7 @@
 module CharacterMap
 
   def encrypt_dictionary
-    "abcdefghijklmnopqrstuvwxyz01234567890 ,."
+    "abcdefghijklmnopqrstuvwxyz0123456789 ,."
   end
 
   def decrypt_dictionary
