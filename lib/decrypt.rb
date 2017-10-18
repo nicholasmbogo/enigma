@@ -10,8 +10,8 @@ class Decrypt
 
   def initialize(message, rotations)
     @message = message
-    @offsets = OffsetCalculator.new
-    @rotation = @offsets.final_rotation
+    #@offsets = OffsetCalculator.new
+    #@rotation = @offsets.final_rotation
     @rotations = rotations
     @decrypted_message = []
   end

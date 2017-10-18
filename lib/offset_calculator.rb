@@ -38,7 +38,6 @@ class OffsetCalculator
   end
 
   def final_rotation
-    @key_gen.create_key
     {a: @key_gen.a_rotation + a_offset,
      b: @key_gen.b_rotation + b_offset,
      c: @key_gen.c_rotation + c_offset,
