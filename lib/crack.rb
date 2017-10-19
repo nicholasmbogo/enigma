@@ -2,7 +2,7 @@ require './lib/offset_calculator'
 require './lib/decrypt'
 class Crack
 
-  def initilize(message, date = Time.now)
+  def initialize(message, date = Time.now)
 
     @message = message
     @date = date
