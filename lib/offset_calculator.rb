@@ -1,10 +1,11 @@
 require_relative 'key_generator'
+require 'Time'
 
 class OffsetCalculator
 
   attr_reader :key
 
-  def initialize(key = nil, date = Time.now)
+  def initialize(key = nil, date = Date.today)
     @date = date
     @key_gen = KeyGenerator.new(key)
   end

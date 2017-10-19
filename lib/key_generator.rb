@@ -12,7 +12,7 @@ class KeyGenerator
   def create_key(key)
     if key
       @key_string = key
-      @key_array = key_string.chars.map do |char|
+      @key_array = key_string.to_s.chars.map do |char|
         char.to_i
       end
       #binding.pry

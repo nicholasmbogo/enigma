@@ -6,6 +6,7 @@ require 'pry'
 
 
 class CharacterMapTest < Minitest::Test
+  include CharacterMap
 
   def test_character_map_exists
     character = CharacterMap.new

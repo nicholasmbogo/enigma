@@ -1,19 +1,20 @@
 require './lib/offset_calculator'
 require './lib/decrypt'
+require 'Time'
+
 class Crack
 
-  def initilize(message, date = Time.now)
-
+  def initialize(message, date = Date.today)
     @message = message
     @date = date
   end
 
-  def crack_message(message)
+  def crack_message
     100000.times do |x|
       test_key = generate_key(x)
-      offset_calculator = OffsetCalculator.new(test_key)
+      offset_calculator = OffsetCalculator.new(test_key, @date)
       rotations = offset_calculator.final_rotation
-      decrypted_message = Decrypt.new(message, rotations).decrypted_message
+      decrypted_message = Decrypt.new(@message, rotations).decrypted_message
 
       if decrypted_message[-8..-1] == " ..end.."
         return decrypted_message

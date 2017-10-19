@@ -2,17 +2,17 @@ require './lib/character_map'
 require './lib/offset_calculator'
 require './lib/character_map'
 require 'pry'
+require 'Time'
 
 class Decrypt
   include CharacterMap
 
   attr_reader :message, :rotations, :character_map
 
-  def initialize(message, rotations)
+  def initialize(message, key, date = Date.today)
     @message = message
-    #@offsets = OffsetCalculator.new
-    #@rotation = @offsets.final_rotation
-    @rotations = rotations
+    @offsets = OffsetCalculator.new(key, date)
+    @rotations = @offsets.final_rotation
     @decrypted_message = []
   end
 
@@ -52,6 +52,3 @@ class Decrypt
   end
 
 end
-
-d = Decrypt.new("t2,ges03nsiclf54esice", {a: 40, b: 21, c: 34, d: 29})
-puts d.decrypted_message

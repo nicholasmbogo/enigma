@@ -1,6 +1,7 @@
 require './lib/character_map'
 require './lib/offset_calculator'
 require './lib/character_map'
+require 'Time'
 
 require 'pry'
 
@@ -9,9 +10,9 @@ class Encrypt
 
   attr_reader :message, :rotations, :character_map, :character
 
-  def initialize(message, rotation = nil)
+  def initialize(message, key = nil, date = Date.today)
     @message = message
-    @offsets = OffsetCalculator.new
+    @offsets = OffsetCalculator.new(key, date)
     @rotation = @offsets.final_rotation
     @encrypted_message = []
   end
@@ -52,6 +53,3 @@ class Encrypt
   end
 
 end
-
-d = Encrypt.new("there can only be one", {a: 40, b: 21, c: 34, d: 29})
-puts d.encrypted_message
