@@ -33,10 +33,4 @@ class EncryptTest < Minitest::Test
 
     assert_equal [["m", "e", "s", "s"], ["a", "g", "e", " "], ["h", "e", "r", "e"]], divided
   end
-
-  # def test_it_can_translate_chunks
-  #   encrypt = Encrypt.new("message here", {a: 40, b: 21, c: 34, d: 29})
-  #
-  #   assert_equal "mzmha1,0hzl7", encrypt.encrypted_message
-  # end
 end

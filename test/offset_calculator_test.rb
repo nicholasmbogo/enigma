@@ -53,11 +53,8 @@ class OffsetCalculatorTest < Minitest::Test
   def test_has_a_final_rotation
     date = Time.parse(" 2017-10-14 13:54:41 -0600")
     offset = OffsetCalculator.new("41521", date)
-
     expected = {a: 48, b: 23, c:60, d:30}
-    #{a: 48, b: 23, c:60, d:30}rotation + offset
 
     assert_equal expected, offset.final_rotation
   end
-
 end

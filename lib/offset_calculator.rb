@@ -9,6 +9,10 @@ class OffsetCalculator
     @key_gen = KeyGenerator.new(key)
   end
 
+  def key_print
+    @key_gen.key_string
+  end
+
   def formated_date
     @date.strftime("%m%d%y").to_i
   end

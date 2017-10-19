@@ -16,7 +16,6 @@ class KeyGeneratorTest < Minitest::Test
   def test_key_has_five_digits
     key_generator = KeyGenerator.new("41521")
 
-    #binding.pry
     assert_equal 5, key_generator.key_string.length
   end
 
@@ -41,7 +40,7 @@ class KeyGeneratorTest < Minitest::Test
 
  def test_has_d_key_rotation
    key_gen = KeyGenerator.new("41521")
- 
+
    assert_equal 21, key_gen.d_rotation
  end
 

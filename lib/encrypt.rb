@@ -1,19 +1,21 @@
 require './lib/character_map'
 require './lib/offset_calculator'
 require './lib/character_map'
-
 require 'pry'
 
 class Encrypt
   include CharacterMap
 
-  attr_reader :message, :rotations, :character_map, :character
+  attr_reader :message, :rotations, :character_map, :character, :key_print, :date_print
 
   def initialize(message, rotation = nil)
     @message = message
     @offsets = OffsetCalculator.new
     @rotation = @offsets.final_rotation
     @encrypted_message = []
+    @date_print = @offsets.formated_date
+    @key_print = @offsets.key_print
+
   end
 
   def split_message
@@ -27,9 +29,6 @@ class Encrypt
     end
     chunks
   end
-
-  #Remember to change "rotations" back to "rotation"...
-  #"rotations" is only for testing.
 
   def translate_chunks
     split_into_groups_of_four.map do |chunk|
@@ -50,8 +49,18 @@ class Encrypt
     translate_chunks
     @encrypted_message.join
   end
-
 end
 
-d = Encrypt.new("there can only be one", {a: 40, b: 21, c: 34, d: 29})
-puts d.encrypted_message
+
+    if ARGV.empty? == false
+    file1 = File.open(ARGV[0], "r")
+    message_to_encrypt = file1.read
+    file1.close
+    encrypt = Encrypt.new(message_to_encrypt)
+    encrypted_text = encrypt.encrypted_message
+    file2 = File.open(ARGV[1], "w")
+    file2.write(encrypted_text)
+    file2.close
+
+    puts "Created '#{ARGV[1]}' with the key #{encrypt.key_print} and date #{encrypt.date_print}."
+end

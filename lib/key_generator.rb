@@ -14,30 +14,27 @@ class KeyGenerator
       @key_string = key
       @key_array = key_string.chars.map do |char|
         char.to_i
-      end
-      #binding.pry
+    end
     else
       @key_array = 5.times.map{Random.rand(10)}
       @key_string = @key_array.map {|num| num.to_s}.join
-      #binding.pry
     end
-   #num = 41521
-   end
+  end
 
-   def a_rotation
+  def a_rotation
       @key_array[0..1].join.to_i
-   end
+  end
 
-   def b_rotation
+  def b_rotation
      @key_array[1..2].join.to_i
-   end
+  end
 
-   def c_rotation
+  def c_rotation
      @key_array[2..3].join.to_i
-   end
+  end
 
-   def d_rotation
+  def d_rotation
      @key_array[-2..-1].join.to_i
-   end
+  end
 
  end

@@ -10,8 +10,6 @@ class Decrypt
 
   def initialize(message, rotations)
     @message = message
-    #@offsets = OffsetCalculator.new
-    #@rotation = @offsets.final_rotation
     @rotations = rotations
     @decrypted_message = []
   end
@@ -27,9 +25,6 @@ class Decrypt
     end
     chunks
   end
-
-  #Remember to change "rotations" back to "rotation"...
-  #"rotations" is only for testing.
 
   def translate_chunks
     split_into_groups_of_four.map do |chunk|
@@ -50,8 +45,16 @@ class Decrypt
     translate_chunks
     @decrypted_message.join
   end
-
 end
 
-d = Decrypt.new("t2,ges03nsiclf54esice", {a: 40, b: 21, c: 34, d: 29})
-puts d.decrypted_message
+if ARGV.empty? == false
+file1 = File.open(ARGV[0], "r")
+message_to_decrypt = file1.read.chomp
+file1.close
+decrypt = Decrypt.new(message_to_decrypt, "ARGV[2]", ARGV[3].to_i)
+decrypted_text = decrypt.decrypted_message
+file2 = File.open(ARGV[1], "w")
+file2.write(decrypted_text)
+file2.close
+puts "Created '#{ARGV[1]}' with the key #{ARGV[2]} and date #{ARGV[3]}."
+end
