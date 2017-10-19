@@ -19,29 +19,27 @@ class KeyGeneratorTest < Minitest::Test
     assert_equal 5, key_generator.key_string.length
   end
 
- def test_has_a_key_rotation
-   key_gen = KeyGenerator.new("41521")
+  def test_has_a_key_rotation
+    key_gen = KeyGenerator.new("41521")
 
+    assert_equal 41, key_gen.a_rotation
+  end
 
-   assert_equal 41, key_gen.a_rotation
- end
+  def test_has_b_key_rotation
+    key_gen = KeyGenerator.new("41521")
 
- def test_has_b_key_rotation
-   key_gen = KeyGenerator.new("41521")
+    assert_equal 15, key_gen.b_rotation
+  end
 
-   assert_equal 15, key_gen.b_rotation
- end
+  def test_has_c_key_rotation
+    key_gen = KeyGenerator.new("41521")
 
- def test_has_c_key_rotation
-   key_gen = KeyGenerator.new("41521")
+    assert_equal 52, key_gen.c_rotation
+  end
 
-   assert_equal 52, key_gen.c_rotation
- end
+  def test_has_d_key_rotation
+    key_gen = KeyGenerator.new("41521")
 
- def test_has_d_key_rotation
-   key_gen = KeyGenerator.new("41521")
-
-   assert_equal 21, key_gen.d_rotation
- end
-
+    assert_equal 21, key_gen.d_rotation
+  end
 end
